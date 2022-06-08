@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+ {% block content %}
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Enter Employee Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css">
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+    </script>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+ </head>
+
+ <body style="background-color:#ccc;">
+  <div class="employee-box" >
+  <div class="login-headers">Offline Details</div>
+  <div class="login-body">
+
+   <form class="form-group" action="{{ url_for('offline') }}" method="post">
+
+
+       <label>Department</label>
+       <input type="text" class="form-control"  id="department" name="department"  placeholder="department"  required>
+       <label> Year</label>
+       <input type="number" class="form-control"  id="year" name="year"  placeholder="year"  >
+       <label>Location</label>
+       <input type="text" class="form-control"  id="location" name="location"  placeholder="location"  >
+       <label> Shelf</label>
+       <input type="number" class="form-control"  id="shelf" name="shelf"  placeholder="shelf"  >
+
+
+
+    <input type="submit" value="Create" class="form-control btn btn-success " name="">
+
+   </form>
+
+
+   <div id="msg">{{ msg }}</div>
+
+  </div>
+
+
+ </div>
+
+ </body>
+
+</html>
+{% endblock %}

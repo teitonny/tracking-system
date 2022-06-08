@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+{% block content %}
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+    </script>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <style>
+        table{
+        width:100%;
+
+        }
+        p{
+        text-align:center;
+        }
+
+        table, th, td{
+        border: 1px solid black;
+  border-collapse: collapse;
+        }
+       myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 20%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 1\0px 12px 20px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+    </style>
+</head>
+
+
+
+
+
+<input type="text" class="myInput"   onkeyup="setFilter(this,1)" placeholder=" Search by fullname..." >
+
+<input type="text" class="myInput"  onkeyup="setFilter(this,2)" placeholder="Search by department..">
+<input type="text" class="myInput"  onkeyup="setFilter(this,3)" placeholder="Search by role..">
+
+<table  id="myTable">
+    <tr>
+        <th>ID</th>
+                    <th>Fullname</th>
+                    <th>Department</th>
+
+        <th>Role</th>
+
+<th>Salary</th>
+<th>Email</th>
+        <th>Phone number</th>
+
+
+    </tr>
+
+
+    {%for employee in employees %}
+    <tr>
+        <td>{{employee.id}}</td>
+       <td>{{employee.fullname}}</td>
+        <td>{{employee.department}}</td>
+        <td>{{employee.role}}</td>
+
+
+        <td>{{employee.salary}}</td>
+
+
+         <td>{{employee.email}}</td>
+
+ <td>{{employee.number}}</td>
+
+    </tr>
+
+
+
+
+
+
+                    {% endfor %}
+</table>
+
+
+
+<script>
+
+    let filters = ["",""];
+
+function setFilter(thisInput, thisIndex) {
+  filters[thisIndex] = thisInput.value.toUpperCase();
+
+  filterTable();
+}
+
+function filterTable() {
+  var table = document.getElementById("myTable");
+  var rows = Object.values(table.getElementsByTagName("tr"));
+
+  for(var rowItr=1; rowItr < rows.length; rowItr++) {
+    var row = rows[rowItr];
+    var cells = Object.values(row.getElementsByTagName("td"));
+
+
+    var isRowVisible = filters.every((filter, filterIndex) => {
+        var cell = cells[filterIndex];
+        var txtValue = cell.textContent || cell.innerText;
+
+        return filter === "" || txtValue.toUpperCase().indexOf(filter) > -1;
+    });
+
+    row.style.display = isRowVisible ? "" : "none";
+  };
+}
+</script>
+
+
+{% endblock %}
